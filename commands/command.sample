@@ -1,0 +1,8 @@
+module.exports = {
+    name: 'Nom',
+    description: 'Description',
+    needArgs: 0,
+    execute(message, args) {
+        Execution
+    }
+}
