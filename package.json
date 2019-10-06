@@ -1,0 +1,23 @@
+{
+  "name": "attiogbot",
+  "version": "1.0.0",
+  "description": "Salut à tous ceux qui veulent participer au projet AttiogBot !\r Commencez d'abord par me DM sur Discord (Valentin Giorgetti), je vous ajouterai en collaborateur sur le projet",
+  "main": "attiogbot.js",
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minot0r/attiogbot.git"
+  },
+  "author": "minot0r",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/minot0r/attiogbot/issues"
+  },
+  "homepage": "https://github.com/minot0r/attiogbot#readme"
+}
