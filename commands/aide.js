@@ -4,8 +4,8 @@ module.exports = {
     needArgs: 0,
     execute(message, args) {
         let commands = ''
-        for(command of message.commands.keyArray())
-            commands += command + '\n'
+        for(command of message.client.commands.keyArray())
+            commands += ' ♥ ' + command + '\n'
 
         message.reply('Il ezist plusieurs commandes : \n' + commands)
     }

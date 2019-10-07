@@ -6,7 +6,10 @@ const { Voice, Config, CommandLoader, Responses, Jaro } = require('./attiog') //
 Voice.log("Chargement...")
 CommandLoader(client) // Charge les commandes
 
-client.once('ready', () => Voice.log("Je suis prêt 😄"))
+client.once('ready', () => {
+    Voice.log("Je suis prêt 😄") 
+    client.user.setActivity('ui <commande>', { type: 'WATCHING'})
+})
 
 client.on('message', message => {
     if(!message.content.startsWith(Config.prefix) || message.author.bot) return
@@ -26,5 +29,4 @@ client.on('message', message => {
 
 })
 
-client.setActivity("ui <commande>", { type: 'WATCHING'})
 client.login(Config.token)
