@@ -8,7 +8,7 @@ CommandLoader(client) // Charge les commandes
 
 client.once('ready', () => {
     Voice.log("Je suis prêt 😄") 
-    client.user.setActivity('ui <commande>', { type: 'WATCHING'})
+    client.user.setActivity('ui aide', { type: 'WATCHING'})
 })
 
 client.on('message', message => {
