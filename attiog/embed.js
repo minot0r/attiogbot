@@ -1,7 +1,7 @@
 const { RichEmbed } = require('discord.js')
 
 const error = function(text) {
-    new RichEmbed()
+    return new RichEmbed()
         .setTitle('Attiogbot')
         .setDescription(text)
         .setColor(0xF9423A)
@@ -9,7 +9,7 @@ const error = function(text) {
 }
 
 const info = function(text) {
-    new RichEmbed()
+    return new RichEmbed()
         .setTitle('Attiogbot')
         .setDescription(text)
         .setColor(0x0072CE)
