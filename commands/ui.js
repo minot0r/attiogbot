@@ -8,6 +8,6 @@ module.exports = {
         if(!isNaN(args[0]) && args[0] < 500)
             message.channel.send('ui '.repeat(args[0]))
         else
-            message.reply(Embed.error(Responses.commandError))
+            message.channel.send(Embed.error(Responses.commandError))
     }
 }

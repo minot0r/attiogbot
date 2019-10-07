@@ -17,14 +17,14 @@ client.on('message', message => {
     const args = message.content.slice(Config.prefix.length).split(/ +/)
     const command = args.shift().toLowerCase()
 
-    if(!client.commands.has(command)) return message.reply(Embed.error(Responses.commandDoesNotExist(Jaro(command, client.commands.keyArray()))))
-    if(client.commands.get(command).needArgs != args.length) return message.reply(Embed.error(Responses.argsError(client.commands.get(command).needArgs)))
+    if(!client.commands.has(command)) return message.channel.send(Embed.error(Responses.commandDoesNotExist(Jaro(command, client.commands.keyArray()))))
+    if(client.commands.get(command).needArgs != args.length) return message.channel.send(Embed.error(Responses.argsError(client.commands.get(command).needArgs)))
 
     try {
         client.commands.get(command).execute(message, args)
     } catch(error) {
         Voice.error(error)
-        message.reply(Embed.error(Responses.error))
+        message.channel.send(Embed.error(Responses.error))
     }
 
 })

@@ -9,6 +9,6 @@ module.exports = {
         for(command of message.client.commands.array())
             commands += ' ' + command.name + ' : ' + command.description + '\n'
 
-        message.reply(Embed.description('Il eziste plusieurs commandes : \n' + commands))
+        message.channel.send(Embed.description('Il eziste plusieurs commandes : \n' + commands))
     }
 }
