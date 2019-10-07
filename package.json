@@ -4,7 +4,8 @@
   "description": "Salut à tous ceux qui veulent participer au projet AttiogBot !\r Commencez d'abord par me DM sur Discord (Valentin Giorgetti), je vous ajouterai en collaborateur sur le projet",
   "main": "attiogbot.js",
   "dependencies": {
-    "discord.js": "^11.5.1"
+    "discord.js": "^11.5.1",
+    "ical": "^0.6.0"
   },
   "devDependencies": {},
   "scripts": {
