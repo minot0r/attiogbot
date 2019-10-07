@@ -6,7 +6,7 @@ module.exports = {
     needArgs: 2,
     execute(message, args) {
         let groupe = this.computeGroup(args[0], args[1]);
-        if(groupe <= 3170 && groupe >= 3163)
+        if(groupe >= 3170 && groupe <= 3163)
             return message.channel.send(Embed.error('Ce groupe n\'eziste pas 😥'))
 
         let closest = { date: Infinity, event: null }
