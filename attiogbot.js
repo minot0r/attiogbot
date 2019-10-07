@@ -18,10 +18,13 @@ client.on('message', message => {
     const command = args.shift().toLowerCase()
 
     if(!client.commands.has(command)) return message.channel.send(Embed.error(Responses.commandDoesNotExist(Jaro(command, client.commands.keyArray()))))
-    if(client.commands.get(command).needArgs != args.length) return message.channel.send(Embed.error(Responses.argsError(client.commands.get(command).needArgs)))
+
+    const commandObject = client.commands.get(command)
+
+    if(commandObject.needArgs != args.length) return message.channel.send(Embed.error(Responses.argsError(commandObject.needArgs) + `\nUtilization : ${Config.prefix}` + commandObject.usage))
 
     try {
-        client.commands.get(command).execute(message, args)
+        commandObject.execute(message, args)
     } catch(error) {
         Voice.error(error)
         message.channel.send(Embed.error(Responses.error))

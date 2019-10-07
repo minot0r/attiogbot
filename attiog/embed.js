@@ -5,7 +5,7 @@ const error = function(text) {
         .setTitle('Attiogbot')
         .setDescription(text)
         .setColor(0xF9423A)
-        .setFooter('Attiogbot © INFO GPE 1')
+        .setFooter('Attiogbot © 2020 INFO GPE 1')
 }
 
 const info = function(text) {
@@ -13,7 +13,7 @@ const info = function(text) {
         .setTitle('Attiogbot')
         .setDescription(text)
         .setColor(0x0072CE)
-        .setFooter('Attiogbot © INFO GPE 1')
+        .setFooter('Attiogbot © 2020 INFO GPE 1')
 }
 
 module.exports = {

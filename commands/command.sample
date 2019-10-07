@@ -1,6 +1,7 @@
 module.exports = {
     name: 'Nom',
     description: 'Description',
+    usage: 'Utilisation',
     needArgs: 0,
     execute(message, args) {
         Execution

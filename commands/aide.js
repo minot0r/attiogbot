@@ -3,6 +3,7 @@ const { Embed } = require('../attiog')
 module.exports = {
     name: 'aide',
     description: 'affiche ce menu',
+    usage: 'aide',
     needArgs: 0,
     execute(message, args) {
         let commands = ''
