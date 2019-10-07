@@ -6,8 +6,6 @@ const { Voice, Config, CommandLoader, Responses, Jaro } = require('./attiog') //
 Voice.log("Chargement...")
 CommandLoader(client) // Charge les commandes
 
-console.log("=> " + Jaro("hello", ["hola", "hallo", "cacap"]))
-
 client.once('ready', () => Voice.log("Je suis prêt 😄"))
 
 client.on('message', message => {
@@ -15,8 +13,8 @@ client.on('message', message => {
 
     const args = message.content.slice(Config.prefix.length).split(/ +/)
     const command = args.shift().toLowerCase()
-    
-    if(!client.commands.has(command)) return
+
+    if(!client.commands.has(command)) return message.reply(Responses.commandDoesNotExist(Jaro(command, client.commands.keyArray())))
     if(client.commands.get(command).needArgs != args.length) return message.reply(Responses.argsError(client.commands.get(command).needArgs))
 
     try {
@@ -28,4 +26,4 @@ client.on('message', message => {
 
 })
 
-//client.login(Config.token)
+client.login(Config.token)

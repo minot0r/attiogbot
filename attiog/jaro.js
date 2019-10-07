@@ -5,17 +5,25 @@ const jaro = function(word, list) {
 	}
 
 	for(item of list) {
-		let m = Math.floor(Math.max(word.length, item.length) / 2) - 1
-		let s = 1 / 3 * ((m / word.length) + (m / item.length) + 1) // Presque l'algorithme de Jaro, il faut rajouter les transpositions
+		let dist = Math.floor(Math.max(word.length, item.length) / 2) - 1
+		let matches = 0
 
-		if(s > word.score)
+		for(let i = 0; i < word.length; i++) {
+			let start = Math.max(0, i - dist)
+			let end = Math.min(i + dist, item.length - 1)
+
+			for(let j = start; j <= end; j++)
+				if(word.charAt(j) == item.charAt(j)) matches++
+		}
+
+		let score = 1 / 3 * ((matches / word.length) + (matches / item.length) + 1) // Presque l'algorithme de Jaro, il faut rajouter les transpositions
+
+		if(stats.score < score)
 			stats = {
-				score: s,
+				score: score,
 				value: item
 			}
 	}
-
-	console.log(stats.value)
 	return stats.value
 }
 
