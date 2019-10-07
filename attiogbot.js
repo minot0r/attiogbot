@@ -29,4 +29,4 @@ client.on('message', message => {
 
 })
 
-//client.login(Config.token)
+client.login(Config.token)
