@@ -26,5 +26,5 @@ client.on('message', message => {
 
 })
 
-client.user.setActivity("ui <commande>", { type: 'WATCHING'})
+client.setActivity("ui <commande>", { type: 'WATCHING'})
 client.login(Config.token)
