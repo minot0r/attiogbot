@@ -1,12 +1,14 @@
+const { Embed } = require('../attiog')
+
 module.exports = {
     name: 'aide',
     description: 'affiche ce menu',
     needArgs: 0,
     execute(message, args) {
         let commands = ''
-        for(command of message.client.commands.keyArray())
-            commands += ' ♥ ' + command + '\n'
+        for(command of message.client.commands.array())
+            commands += ' ' + command.name + ' : ' + command.description + '\n'
 
-        message.reply('Il ezist plusieurs commandes : \n' + commands)
+        message.reply(Embed.description('Il eziste plusieurs commandes : \n' + commands))
     }
 }
