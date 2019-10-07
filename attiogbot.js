@@ -2,9 +2,11 @@ const { Client, Collection } = require('discord.js') // Prends Client et Collect
 const client = new Client() // Créée un nouveau Client
 client.commands = new Collection() // Créée une nouvelle Collection de commandes
 
-const { Voice, Config, CommandLoader, Responses } = require('./attiog') // Prends nos propres modules : Voice, Config, CommandLoader, Responses
+const { Voice, Config, CommandLoader, Responses, Jaro } = require('./attiog') // Prends nos propres modules : Voice, Config, CommandLoader, Responses, Jaro
 Voice.log("Chargement...")
 CommandLoader(client) // Charge les commandes
+
+console.log("=> " + Jaro("hello", ["hola", "hallo", "cacap"]))
 
 client.once('ready', () => Voice.log("Je suis prêt 😄"))
 
@@ -26,4 +28,4 @@ client.on('message', message => {
 
 })
 
-client.login(Config.token)
+//client.login(Config.token)
