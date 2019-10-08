@@ -8,7 +8,7 @@ module.exports = {
     execute(message, args) {
         let commands = ''
         for(command of message.client.commands.array())
-            commands += ' ' + command.name + ' : ' + command.description + '\n'
+            commands += ' ' + command.name + ' : ' + command.description + '\n\t' + command.usage + '\n'
 
         message.channel.send(Voice.messaging.embed('Il eziste plusieurs commandes : \n' + commands))
     }

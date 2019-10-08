@@ -2,7 +2,7 @@ const { Voice } = require('../attiog')
 
 module.exports = {
     name: 'prochain',
-    description: 'tu peux avoir le proochain cours!',
+    description: 'tu peux avoir le prochain cours!',
     usage: 'prochain <TD> <TP>',
     needArgs: 2,
     execute(message, args) {
