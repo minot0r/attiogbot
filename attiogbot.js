@@ -32,7 +32,7 @@ client.on('message', message => {
 
     try {
         commandObject.execute(message, args)
-        client.cooldowns.set(message.author.id, now);
+        client.cooldowns.set(message.author.id, +(new Date()));
         setTimeout(() => client.cooldowns.delete(message.author.id), 3000);
 
     } catch(error) {
