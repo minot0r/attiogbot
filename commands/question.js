@@ -6,8 +6,9 @@ module.exports = {
     usage: 'question <Question>',
     needArgs: -1,
     execute(message, args) {
-        let msg = message.channel.send(Voice.messaging.embed("Laisse moi reflechir 🤔"))
-        setTimeout(() => msg.edit('', Voice.messaging.embed(this.pickAnswer())), 5000)
+        message.channel.send(Voice.messaging.embed("Laisse moi reflechir 🤔")).then((msg) => {
+            setTimeout(() => msg.edit('', Voice.messaging.embed(this.pickAnswer())), 5000)
+        })
     },
     pickAnswer() {
         let answers = [
