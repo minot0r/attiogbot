@@ -4,11 +4,11 @@ client.commands = new Collection() // Créée une nouvelle Collection de command
 client.cooldowns = new Collection() // Créée une nouvelle Collection de cooldowns
 
 const { Voice, Config, CommandLoader, Responses, Jaro } = require('./attiog') // Prends nos propres modules : Voice, Config, CommandLoader, Responses, Jaro, Embed
-Voice.log("Chargement...")
+Voice.local.log("Chargement...")
 CommandLoader(client) // Charge les commandes
 
 client.once('ready', () => {
-    Voice.log("Je suis prêt 😄") 
+    Voice.local.messaginglog("Je suis prêt 😄") 
     client.user.setActivity('ui aide', { type: 'WATCHING'})
 })
 
@@ -36,7 +36,7 @@ client.on('message', message => {
         setTimeout(() => client.cooldowns.delete(message.author.id), 3000);
 
     } catch(error) {
-        Voice.error(error)
+        Voice.local.error(error)
         message.channel.send(Voice.messaging.embed(Responses.error, true))
     }
 
