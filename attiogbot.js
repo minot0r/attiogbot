@@ -28,7 +28,7 @@ client.on('message', message => {
 
     const commandObject = client.commands.get(command)
 
-    if(commandObject.needArgs != args.length) return message.channel.send(Voice.messaging.embed(Responses.argsError(commandObject.needArgs) + `\nUtilization : ${Config.prefix}` + commandObject.usage, true))
+    if(commandObject.needArgs != args.length && commandObject.needArgs >= 0) return message.channel.send(Voice.messaging.embed(Responses.argsError(commandObject.needArgs) + `\nUtilization : ${Config.prefix}` + commandObject.usage, true))
 
     try {
         commandObject.execute(message, args)
