@@ -8,7 +8,7 @@ Voice.local.log("Chargement...")
 CommandLoader(client) // Charge les commandes
 
 client.once('ready', () => {
-    Voice.local.messaginglog("Je suis prêt 😄") 
+    Voice.local.log("Je suis prêt 😄") 
     client.user.setActivity('ui aide', { type: 'WATCHING'})
 })
 

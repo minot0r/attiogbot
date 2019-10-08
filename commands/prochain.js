@@ -17,10 +17,10 @@ module.exports = {
         let closest = { date: Infinity, event: null }
         let now = new Date()
         require('ical').fromURL(`https://edt.univ-nantes.fr/iut_nantes/g${groupe}.ics`, {}, function (err, data) {
-            for (let k in data) {
-                if (data.hasOwnProperty(k)) {
-                    var ev = data[k];
-                    if (data[k].type == 'VEVENT') {
+            for (let entry in data) {
+                if (data.hasOwnProperty(entry)) {
+                    var ev = data[entry];
+                    if (data[entry].type == 'VEVENT') {
                         let date = Date.parse(ev.start);
                         if(date >= now && (date < new Date(closest.date) || date < closest.date))
                             closest = {
