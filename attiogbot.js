@@ -1,6 +1,7 @@
 const { Client, Collection } = require('discord.js') // Prends Client et Collection dans la librarire Discord.js 😄
 const client = new Client() // Créée un nouveau Client
 client.commands = new Collection() // Créée une nouvelle Collection de commandes
+client.cooldowns = new Collection() // Créée une nouvelle Collection de cooldowns
 
 const { Voice, Config, CommandLoader, Responses, Jaro, Embed } = require('./attiog') // Prends nos propres modules : Voice, Config, CommandLoader, Responses, Jaro, Embed
 Voice.log("Chargement...")
@@ -14,6 +15,12 @@ client.once('ready', () => {
 client.on('message', message => {
     if(!message.content.startsWith(Config.prefix) || message.author.bot) return
 
+    if(client.cooldowns.has(message.author.id)) {
+        let timeToWait = client.cooldowns.get(message.author.id) - (+(new Date())) / 1000
+
+        return message.channel.send(Embed.error(`Veuillez attendre encore ${timeToWait}s pour executer une autre commande`))
+    }
+    
     const args = message.content.slice(Config.prefix.length).split(/ +/)
     const command = args.shift().toLowerCase()
 
@@ -25,6 +32,9 @@ client.on('message', message => {
 
     try {
         commandObject.execute(message, args)
+        client.cooldowns.set(message.author.id, now);
+        setTimeout(() => client.cooldowns.delete(message.author.id), 3000);
+
     } catch(error) {
         Voice.error(error)
         message.channel.send(Embed.error(Responses.error))
