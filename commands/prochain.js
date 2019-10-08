@@ -72,7 +72,7 @@ module.exports = {
                         closest.date = date.start
                     }     
                 })
-                resolve("Prochain cours : " + closest.event.summary + "\n" + closest.date.getHours + ":" + closest.date.start.getMinutes().toString().replace(/^[0-9]?$/, '0' + closest.date.start.getMinutes()))
+                resolve("Prochain cours : " + closest.event.summary + "\n" + closest.date.getHours() + ":" + closest.date.getMinutes().toString().replace(/^[0-9]?$/, '0' + closest.date.getMinutes()))
             })
         })
     }
