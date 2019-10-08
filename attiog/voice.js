@@ -1,11 +1,24 @@
-const voice = class Voice {
-    
-    static log(message) {
-        console.log(`\x1b[33m[Attiogbot]\x1b[37m ${message}`)
-    }
+const { RichEmbed } = require('discord.js')
 
-    static error(message) {
-        console.log(`\x1b[31m[Erreur]\x1b[37m ${message}`)
+const voice = {
+    
+    local: {
+        log(message) {
+            console.log(`\x1b[33m[Attiogbot]\x1b[37m ${message}`)
+        },
+        error(message) {
+            console.log(`\x1b[31m[Erreur]\x1b[37m ${message}`)
+        }
+    },
+
+    messaging: {
+        embed(text, isError = false) {
+            return new RichEmbed()
+                .setTitle('Attiogbot')
+                .setDescription(text)
+                .setColor(isError ? 0xF9423A : 0x0072CE)
+                .setFooter('Attiogbot © 2020 INFO GPE 1')
+        } 
     }
 
 }

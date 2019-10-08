@@ -1,4 +1,4 @@
-const { Responses, Embed } = require('../attiog')
+const { Responses, Voice } = require('../attiog')
 
 module.exports = {
     name: 'ui',
@@ -9,6 +9,6 @@ module.exports = {
         if(!isNaN(args[0]) && args[0] < 500)
             message.channel.send('ui '.repeat(args[0]))
         else
-            message.channel.send(Embed.error(Responses.commandError))
+            message.channel.send(Voice.messaging.embed(Responses.commandError, true))
     }
 }

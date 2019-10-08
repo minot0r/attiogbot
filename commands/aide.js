@@ -1,4 +1,4 @@
-const { Embed } = require('../attiog')
+const { Voice } = require('../attiog')
 
 module.exports = {
     name: 'aide',
@@ -10,6 +10,6 @@ module.exports = {
         for(command of message.client.commands.array())
             commands += ' ' + command.name + ' : ' + command.description + '\n'
 
-        message.channel.send(Embed.info('Il eziste plusieurs commandes : \n' + commands))
+        message.channel.send(Voice.messaging.embed('Il eziste plusieurs commandes : \n' + commands))
     }
 }

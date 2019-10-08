@@ -1,4 +1,4 @@
-const { Embed } = require('../attiog')
+const { Voice } = require('../attiog')
 
 module.exports = {
     name: 'prochain',
@@ -7,12 +7,12 @@ module.exports = {
     needArgs: 2,
     execute(message, args) {
         if(isNaN(args[0]) || isNaN(args[1]))
-            return message.channel.send(Embed.error('Les arguments doivent être sous la forme TD TP\nPar exemple 1 1'))
+            return message.channel.send(Voice.messaging.embed('Les arguments doivent être sous la forme TD TP\nPar exemple 1 1', true))
 
         let groupe = this.computeGroup(args[0], args[1])
 
         if(groupe > 3170 || groupe < 3163)
-            return message.channel.send(Embed.error('Ce groupe n\'eziste pas 😥'))
+            return message.channel.send(Voice.messaging.embed('Ce groupe n\'eziste pas 😥', true))
 
         let closest = { date: Infinity, event: null }
         let now = new Date()
@@ -31,7 +31,7 @@ module.exports = {
                     }
                 }
             }
-            if(closest.event != null) message.channel.send(Embed.info('Prochain cours : \n' + closest.event.description))
+            if(closest.event != null) message.channel.send(Voice.messaging.embed('Prochain cours : \n' + closest.event.description))
         })
     },
     computeGroup(td, tp) {
