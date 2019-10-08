@@ -16,7 +16,7 @@ client.on('message', message => {
     if(!message.content.startsWith(Config.prefix) || message.author.bot) return
 
     if(client.cooldowns.has(message.author.id)) {
-        let timeToWait = client.cooldowns.get(message.author.id) - (+(new Date())) / 1000
+        let timeToWait = (client.cooldowns.get(message.author.id) - (+(new Date()))) / 1000
 
         return message.channel.send(Embed.error(`Veuillez attendre encore ${timeToWait}s pour executer une autre commande`))
     }
