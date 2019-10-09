@@ -69,10 +69,10 @@ module.exports = {
             case "aujourd'hui": return new Date()
             case "après-demain": return new Date().setDate(new Date().getDate() + 2)
             case "lundi": return this.getMonday(new Date())
-            case "mardi": return this.getMonday(new Date()).setDate(new Date().getDate() + 1)
-            case "mercredi": return this.getMonday(new Date()).setDate(new Date().getDate() + 2)
-            case "jeudi": return this.getMonday(new Date()).setDate(new Date().getDate() + 3)
-            case "vendredi": return this.getMonday(new Date()).setDate(new Date().getDate() + 4)
+            case "mardi": return this.getMonday(new Date()).setDate(this.getMonday(new Date()).getDate() + 1)
+            case "mercredi": return this.getMonday(new Date()).setDate(this.getMonday(new Date()).getDate() + 2)
+            case "jeudi": return this.getMonday(new Date()).setDate(this.getMonday(new Date()).getDate() + 3)
+            case "vendredi": return this.getMonday(new Date()).setDate(this.getMonday(new Date()).getDate() + 4)
         }
     },
     getMonday(date) {
