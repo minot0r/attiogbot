@@ -25,7 +25,7 @@ module.exports = {
             else if(new Date(args[0]) != "Invalid Date")
                 this.getNextDay(group, args[0]).then(data => message.channel.send(Voice.messaging.embed(data))) 
             else
-                this.getNextDay(group, getDate(args[0])).then(data => message.channel.send(Voice.messaging.embed(data)))
+                this.getNextDay(group, this.getDate(args[0])).then(data => message.channel.send(Voice.messaging.embed(data)))
         }
 
         
