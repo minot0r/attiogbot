@@ -52,7 +52,7 @@ module.exports = {
     },
     getClosestCourse(group) {
         new Promise((resolve, reject) => 
-            new EDT(group, new Date(date)).build().then(edt => {
+            new EDT(group, new Date()).build().then(edt => {
                 let course = edt.getClosestCourse()
                 let timeset = course.schedules
                 resolve(`> **__${course.type}__ - ${course.subject}**\n
