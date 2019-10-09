@@ -35,7 +35,7 @@ module.exports = {
         return base + td * 2 + tp * 1 - 2
     },
     getNextDay(group, date = new Date()) {
-        new Promise((resolve, reject) => 
+        return new Promise((resolve, reject) => 
             new EDT(group, new Date(date)).build().then(edt => {
                 let formattedText = ''
                 for(let course of edt.getCourses()) {
@@ -51,7 +51,7 @@ module.exports = {
         )
     },
     getClosestCourse(group) {
-        new Promise((resolve, reject) => 
+        return new Promise((resolve, reject) => 
             new EDT(group, new Date()).build().then(edt => {
                 let course = edt.getClosestCourse()
                 let timeset = course.schedules
