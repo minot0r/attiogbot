@@ -37,7 +37,7 @@ module.exports = {
     getNextDay(group, date = new Date()) {
         return new Promise((resolve, reject) => 
             new EDT(group, new Date(date)).build().then(edt => {
-                let formattedText = `***EDT du ${edt.getCourses()[0].getDate()}/${edt.getCourses()[0].getMonth()}***`
+                let formattedText = `***EDT du ${edt.getCourses()[0].schedules.start.getDate()}/${edt.getCourses()[0].schedules.start.getMonth()}***`
                 for(let course of edt.getCourses()) {
                     let timeset = course.schedules
                     formattedText += `> **__${course.type}__ - ${course.subject}**\n
