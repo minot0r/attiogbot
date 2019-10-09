@@ -3,11 +3,14 @@ const { RichEmbed } = require('discord.js')
 const voice = {
     
     local: {
-        log(message) {
+        info(message) {
             console.log(`\x1b[33m[Attiogbot]\x1b[37m ${message}`)
         },
         error(message) {
             console.log(`\x1b[31m[Erreur]\x1b[37m ${message}`)
+        },
+        log(message) {
+            console.log(`\x1b[94m[AttiogDI]\x1b[37m ${message}`)
         }
     },
 

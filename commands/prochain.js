@@ -25,7 +25,7 @@ module.exports = {
             else if(new Date(args[0]) != "Invalid Date")
                 this.getNextDay(group, args[0]).then(data => message.channel.send(Voice.messaging.embed(data))) 
             else
-                message.channel.send(Voice.messaging.embed(`Cet argument n'existe pas, vouliez vous dire ${Jaro(args[0], ['cours', 'jour'])}`, true))
+                this.getNextDay(group, getDate(args[0])).then(data => message.channel.send(Voice.messaging.embed(data)))
         }
 
         
@@ -37,7 +37,7 @@ module.exports = {
     getNextDay(group, date = new Date()) {
         return new Promise((resolve, reject) => 
             new EDT(group, new Date(date)).build().then(edt => {
-                let formattedText = ''
+                let formattedText = `***EDT du ${edt.getCourses()[0].getDate()}/${edt.getCourses()[0].getMonth()}***`
                 for(let course of edt.getCourses()) {
                     let timeset = course.schedules
                     formattedText += `> **__${course.type}__ - ${course.subject}**\n
@@ -62,5 +62,23 @@ module.exports = {
 **Temps** : ${timeset.start.getHours()}h${timeset.start.getMinutes().toString().replace(/^[0-9]?$/, '0' + timeset.start.getMinutes())} ➮ ${timeset.end.getHours()}h${timeset.end.getMinutes().toString().replace(/^[0-9]?$/, '0' + timeset.end.getMinutes())}\n\n`)
             })
         )
+    },
+    getDate(inputDate) {
+        switch(Jaro(inputDate, ["demain", "aujourd'hui", "après-demain", "lundi", "mardi", "mercredi", "jeudi", "vendredi"])) {
+            case "demain": return new Date().setDate(new Date().getDate() + 1)
+            case "aujourd'hui": return new Date()
+            case "après-demain": return new Date().setDate(new Date().getDate() + 2)
+            case "lundi": return this.getMonday(new Date())
+            case "mardi": return this.getMonday(new Date()).setDate(new Date().getDate() + 1)
+            case "mercredi": return this.getMonday(new Date()).setDate(new Date().getDate() + 2)
+            case "jeudi": return this.getMonday(new Date()).setDate(new Date().getDate() + 3)
+            case "vendredi": return this.getMonday(new Date()).setDate(new Date().getDate() + 4)
+        }
+    },
+    getMonday(date) {
+        var day = date.getDay() || 7;  
+        if(day !== 1) 
+            date.setHours(-24 * (day - 1)); 
+        return date;
     }
 }

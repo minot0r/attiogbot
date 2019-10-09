@@ -1,15 +1,32 @@
+const readline = require('readline')
 const { Client, Collection } = require('discord.js') // Prends Client et Collection dans la librarire Discord.js 😄
 const client = new Client() // Créée un nouveau Client
 client.commands = new Collection() // Créée une nouvelle Collection de commandes
 client.cooldowns = new Collection() // Créée une nouvelle Collection de cooldowns
+client.IO = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
 
 const { Voice, Config, CommandLoader, Responses, Jaro } = require('./attiog') // Prends nos propres modules : Voice, Config, CommandLoader, Responses, Jaro, Embed
-Voice.local.log("Chargement...")
+Voice.local.info("Chargement...")
 CommandLoader(client) // Charge les commandes
 
+client.IO.setPrompt('\x1b[94m[>] ')
+client.IO.pause()
+client.IO.on('line', (line) => {
+    Voice.local.log(line)
+    client.IO.prompt()
+})
+client.IO.on('SIGINT', () => {
+    Voice.local.log('Bye bye !')
+    client.IO.close()
+})
+
 client.once('ready', () => {
-    Voice.local.log("Je suis prêt 😄") 
-    client.user.setActivity('ui aide', { type: 'WATCHING'})
+    Voice.local.info("Je suis prêt 😄") 
+    client.user.setActivity('ui aide', { type: 'WATCHING' })
+    client.IO.prompt()
 })
 
 client.on('message', message => {
@@ -30,9 +47,10 @@ client.on('message', message => {
 
     if(commandObject.needArgs != args.length && commandObject.needArgs >= 0) return message.channel.send(Voice.messaging.embed(Responses.argsError(commandObject.needArgs) + `\nUtilization : ${Config.prefix}` + commandObject.usage, true))
 
+    Voice.local.info(`Commande ${command} de l'utilisateur ${message.author.username}`)
     try {
         commandObject.execute(message, args)
-        client.cooldowns.set(message.author.id, +(new Date()));
+        client.cooldowns.set(message.author.id, +(new Date()) + 3000);
         setTimeout(() => client.cooldowns.delete(message.author.id), 3000);
 
     } catch(error) {
