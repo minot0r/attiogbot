@@ -26,6 +26,13 @@ client.IO.on('SIGINT', () => {
 client.once('ready', () => {
     Voice.local.info("Je suis prêt 😄") 
     client.user.setActivity('ui aide', { type: 'WATCHING' })
+
+    setTimeout(_ => {
+        printTodaysEDT()
+        setTimeout(() => printTodaysEDT(), 24 * 3600 * 1000)
+    }, new Date(new Date().setHours(24)).setMinutes(00) - new Date())
+    
+
     client.IO.prompt()
 })
 
@@ -61,3 +68,9 @@ client.on('message', message => {
 })
 
 client.login(Config.token)
+
+let printTodaysEDT = () => {
+    client.guilds.forEach(guild => guild.channels.forEach(channel => {
+        if(channel.name == "edt") require("./commands/prochain").getNextDay(3163).then(data => channel.send(Voice.messaging.embed(data)))
+    }))
+}
