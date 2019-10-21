@@ -40,13 +40,13 @@ module.exports = {
     getNextDay(group, date = new Date()) {
         return new Promise((resolve, reject) => 
             new EDT(group, new Date(date)).build().then(edt => {
-                let formattedText = `***EDT du ${edt.getCourses()[0].schedules.start.getDate()}/${edt.getCourses()[0].schedules.start.getMonth() + 1}***\n`
+                let formattedText = `***EDT du ${edt.getCourses()[0].schedules.start.getDate()}/${edt.getCourses()[0].schedules.start.getMonth() + 1}***`
                 for(let course of edt.getCourses()) {
                     let timeset = course.schedules
                     formattedText += `> **__${course.type}__ - ${course.subject}**\n
-**Salle** : ${course.location}\n
-**Prof** : ${course.professor}\n
-**Groupe** : ${course.studGroup}\n
+**Salle** : ${course.location}
+**Prof** : ${course.professor}
+**Groupe** : ${course.studGroup}
 **Temps** : ${timeset.start.getHours()}h${timeset.start.getMinutes().toString().replace(/^[0-9]?$/, '0' + timeset.start.getMinutes())} ➮ ${timeset.end.getHours()}h${timeset.end.getMinutes().toString().replace(/^[0-9]?$/, '0' + timeset.end.getMinutes())}\n\n`
                 }
                 resolve(formattedText)
@@ -58,10 +58,10 @@ module.exports = {
             new EDT(group, new Date()).build().then(edt => {
                 let course = edt.getClosestCourse()
                 let timeset = course.schedules
-                resolve(`> **__${course.type}__ - ${course.subject}**\n
-**Salle** : ${course.location}\n
-**Prof** : ${course.professor}\n
-**Groupe** : ${course.studGroup}\n
+                resolve(`> **__${course.type}__ - ${course.subject}**
+**Salle** : ${course.location}
+**Prof** : ${course.professor}
+**Groupe** : ${course.studGroup}
 **Temps** : ${timeset.start.getHours()}h${timeset.start.getMinutes().toString().replace(/^[0-9]?$/, '0' + timeset.start.getMinutes())} ➮ ${timeset.end.getHours()}h${timeset.end.getMinutes().toString().replace(/^[0-9]?$/, '0' + timeset.end.getMinutes())}\n\n`)
             })
         )
