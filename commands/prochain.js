@@ -18,14 +18,17 @@ module.exports = {
             if(group > 3170 || group < 3163)
                 return message.channel.send(Voice.messaging.embed('Ce groupe n\'eziste pas 😥', true))
 
-            if(args[0] == "cours")
-                this.getClosestCourse(group).then(data => message.channel.send(Voice.messaging.embed(data))) 
+            message.channel.send(Voice.messaging.embed('Chargement...')).then((msg) => {
+                if(args[0] == "cours")
+                this.getClosestCourse(group).then(data => msg.edit('', Voice.messaging.embed(data))) 
             else if(args[0] == "jour")
-                this.getNextDay(group).then(data => message.channel.send(Voice.messaging.embed(data))) 
+                this.getNextDay(group).then(data => msg.edit('', Voice.messaging.embed(data))) 
             else if(new Date(args[0]) != "Invalid Date")
-                this.getNextDay(group, args[0]).then(data => message.channel.send(Voice.messaging.embed(data))) 
+                this.getNextDay(group, args[0]).then(data => msg.edit('', Voice.messaging.embed(data))) 
             else
-                this.getNextDay(group, this.getDate(args[0])).then(data => message.channel.send(Voice.messaging.embed(data)))
+                this.getNextDay(group, this.getDate(args[0])).then(data => msg.edit('', Voice.messaging.embed(data)))
+            })
+            
         }
 
         
