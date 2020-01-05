@@ -3,37 +3,14 @@ const { Client, Collection } = require('discord.js') // Prends Client et Collect
 const client = new Client() // Créée un nouveau Client
 client.commands = new Collection() // Créée une nouvelle Collection de commandes
 client.cooldowns = new Collection() // Créée une nouvelle Collection de cooldowns
-client.IO = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
 
 const { Voice, Config, CommandLoader, Responses, Jaro } = require('./attiog') // Prends nos propres modules : Voice, Config, CommandLoader, Responses, Jaro, Embed
 Voice.local.info("Chargement...")
 CommandLoader(client) // Charge les commandes
 
-client.IO.setPrompt('\x1b[94m[>] ')
-client.IO.pause()
-client.IO.on('line', (line) => {
-    Voice.local.log(line)
-    client.IO.prompt()
-})
-client.IO.on('SIGINT', () => {
-    Voice.local.log('Bye bye !')
-    client.IO.close()
-})
-
 client.once('ready', () => {
     Voice.local.info("Je suis prêt 😄") 
-    client.user.setActivity('ui aide', { type: 'WATCHING' })
-
-    setTimeout(_ => {
-        printTodaysEDT()
-        setTimeout(() => printTodaysEDT(), 24 * 3600 * 1000)
-    }, new Date(new Date().setHours(24)).setMinutes(00) - new Date())
-    
-
-    client.IO.prompt()
+    client.user.setActivity('ui aide', { type: 'WATCHING' })    
 })
 
 client.on('message', message => {
@@ -68,9 +45,3 @@ client.on('message', message => {
 })
 
 client.login(Config.token)
-
-let printTodaysEDT = () => {
-    client.guilds.forEach(guild => guild.channels.forEach(channel => {
-        if(channel.name == "edt") require("./commands/prochain").getNextDay(3163).then(data => channel.send(Voice.messaging.embed(data)))
-    }))
-}
